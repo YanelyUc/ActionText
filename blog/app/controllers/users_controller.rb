@@ -56,10 +56,9 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to params[:destino], notice: 'User was successfully destroyed.'}
+      format.html { redirect_to params[:destination], notice: 'User was successfully destroyed.'}
       format.json { head :no_content }
     end
-
   end
 
   def recently
@@ -68,11 +67,8 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user
-     
+    def set_user     
       @user = User.find(params[:id])
-
-
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

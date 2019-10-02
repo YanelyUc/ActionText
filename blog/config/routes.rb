@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-	delete '/users/:id',  to: 'users#destroy', as: 'destroy'
-	 
+  delete '/users/:id',  to: 'users#destroy', as: 'destroy'
+
   resources :users, except: :destroy do 
-  	collection do
+    collection do
       get 'recently'
     end
   end
