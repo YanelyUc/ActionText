@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+
+<%= render 'table', users: @users, destino: users_path %>
+
+
+<%= link_to 'New User', new_user_path %>
+<%= link_to 'Recentlys users', recently_users_path %>
+
+
