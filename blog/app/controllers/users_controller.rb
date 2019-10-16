@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :active, :inactive]
 
   # GET /users
   # GET /users.json
@@ -37,6 +37,42 @@ class UsersController < ApplicationController
     end
   end
 
+  def active
+
+    @user.is_active = true
+    user_upated = @user.update()
+
+    if (user_upated)
+      respond_to do |format|
+        format.html { redirect_to params[:destination], notice: 'Estatus activado.'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to params[:destination], notice: 'No se pudo realizar el cambio de estatus.'}
+        format.json { head :no_content }
+      end
+    end  
+  end
+
+  def inactive
+    @user.is_active = false
+    user_upated = @user.update()
+
+    if (user_upated)
+      respond_to do |format|
+        format.html { redirect_to params[:destination], notice: 'Estatus inactivo.'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to params[:destination], notice: 'No se pudo realizar el cambio de estatus.'}
+        format.json { head :no_content }
+      end
+    end 
+     
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
@@ -67,12 +103,12 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user     
-      @user = User.find(params[:id])
+    def set_user  
+      @user = User.find(params[:id]) 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :name, :last_name, :mobile_phone)
+      params.require(:user).permit(:email, :name, :last_name, :mobile_phone, :is_active)
     end
 end

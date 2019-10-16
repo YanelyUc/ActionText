@@ -20,6 +20,9 @@
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', destroy_path(user, destination: destination), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Active', active_path(user.id, destination: destination), method: :post %></td>
+        <td><%= link_to 'Inactive', inactive_path(user.id, destination: destination), method: :post %></td>
+        <td><%= user.is_active %></td>
       </tr>
     <% end %>
   </tbody>
