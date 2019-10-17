@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :active, :inactive]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :activate, :deactivate]
 
   # GET /users
   # GET /users.json
@@ -37,12 +37,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def active
-
-    @user.is_active = true
-    user_upated = @user.update()
-
-    if (user_upated)
+  def activate
+    if @user.update(is_active: true)
       respond_to do |format|
         format.html { redirect_to params[:destination], notice: 'Estatus activado.'}
         format.json { head :no_content }
@@ -55,11 +51,8 @@ class UsersController < ApplicationController
     end  
   end
 
-  def inactive
-    @user.is_active = false
-    user_upated = @user.update()
-
-    if (user_upated)
+  def deactivate
+    if @user.update(is_active: false)
       respond_to do |format|
         format.html { redirect_to params[:destination], notice: 'Estatus inactivo.'}
         format.json { head :no_content }

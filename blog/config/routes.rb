@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  
   delete '/users/:id',  to: 'users#destroy', as: 'destroy'
-  post '/users/:id/active', to: 'users#active', as: 'active'
-  post '/users/:id/inactive', to: 'users#inactive', as: 'inactive'
-
+  
   resources :users, except: :destroy do 
     collection do
       get 'recently'
+    end
+    member do
+      post 'activate'
+      post 'deactivate'
     end
   end
    
